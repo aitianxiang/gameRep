@@ -1,21 +1,27 @@
 pragma solidity ^0.4.16;
 
 contract theThreeKingdoms{
+    struct Amount {
+        uint256 amont_N;
+        uint256 amont_D;
+    }
+
     struct Kingdom {
         string name;
         address kingdom_address;
         Voter[] voters;
-        uint256 amont_N;
-        uint256 amont_D;
+        Amount amount;
     }
     
     struct Voter {
         address voter;
-        uint256 amont_N;
-        uint256 amont_D;
+        mapping(address => Amount) byKings;
     }
     
-    mapping(address=>Kingdom) kingdomMap;
+    mapping(address => Kingdom) private kingdomMap;
+    mapping(address => Voter) private voterMap;
+
+    address[] private kingsAddress;
     
     // Overflow protected math functions
 
